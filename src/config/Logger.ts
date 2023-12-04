@@ -1,4 +1,4 @@
-const pino = require("pino");
+import pino from "pino";
 
 const getLogFileName = () => {
   const now = new Date();
@@ -13,9 +13,12 @@ const transport = pino.transport({
     {
       target: "pino/file",
       options: { destination: `./logs/${getLogFileName()}` },
+      level: "error",
     },
     {
       target: "pino-pretty",
+      options: {},
+      level: "trace",
     },
   ],
 });

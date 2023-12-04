@@ -1,3 +1,3 @@
-import AccountRouter from "./AccountRoute";
+import { StripeRouter } from "./StripeRouter";
 
-export { AccountRouter };
+export { StripeRouter };

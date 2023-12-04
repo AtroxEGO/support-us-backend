@@ -1,29 +1,48 @@
 {
   "name": "supportus",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.ts",
+  "description": "A simple GraphQL API for web application that allows users to support their favorite people and organizations.",
+  "main": "dist/index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc",
-    "start": "node -r dotenv/config dist/index.js",
-    "dev": "nodemon -r dotenv/config index.ts"
+    "start": "npx tsc && node -r dotenv/config dist/index.js",
+    "dev": "npx tsx watch -r dotenv/config ./src/index.ts",
+    "migrate": "npx prisma generate && npx prisma migrate dev --name init"
+  },
+  "prisma": {
+    "seed": "npx tsx prisma/seed.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "Paweł Polakiewicz",
   "license": "ISC",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/cors": "^2.8.16",
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.5",
     "@types/node": "^20.9.0",
+    "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "@apollo/server": "^4.9.5",
+    "@graphql-tools/schema": "^10.0.0",
+    "@graphql-yoga/node": "^3.9.1",
+    "@pothos/core": "^3.38.0",
+    "@pothos/plugin-errors": "^3.11.1",
+    "@pothos/plugin-prisma": "^3.61.0",
+    "@pothos/plugin-scope-auth": "^3.20.0",
+    "@pothos/plugin-validation": "^3.10.1",
+    "@prisma/client": "^5.6.0",
+    "apollo-server": "^3.13.0",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "graphql": "^16.8.1",
+    "graphql-scalars": "^1.22.4",
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
     "nodemon": "^3.0.1",
@@ -31,8 +50,10 @@
     "pino": "^8.16.1",
     "pino-http": "^8.5.1",
     "pino-pretty": "^10.2.3",
-    "ts-node": "^10.9.1",
+    "stripe": "^14.5.0",
     "tsconfig-paths": "^4.2.0",
-    "yup": "^1.3.2"
+    "tsx": "^4.1.4",
+    "yup": "^1.3.2",
+    "zod": "^3.22.4"
   }
 }

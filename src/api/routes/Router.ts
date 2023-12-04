@@ -1,8 +1,12 @@
 import express from "express";
-import { AccountRouter } from ".";
+import { StripeRouter } from "./index";
 const router = express.Router();
 
-router.use("/account", AccountRouter);
+router.get("/", (_, res) => {
+  res.json("Ok");
+});
+
+router.use("/stripe", StripeRouter);
 
 router.all("*", (_, res) => {
   res.status(404);
