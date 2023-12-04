@@ -1,0 +1,32 @@
+datasource db {
+    provider = "postgresql"
+    url = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator pothos {
+  provider = "prisma-pothos-types"
+}
+
+model DonationPage {
+    id    Int    @id @default(autoincrement())
+    alias String @unique @default(uuid())
+    title String
+    body  String
+    owner  User  @relation(fields: [userId], references: [id])
+    userId Int   @unique
+}
+
+model User {
+  id      Int    @id @default(autoincrement())
+  email   String @unique
+  name    String
+  password String
+  addedAuthenticator Boolean @default(false)
+  stripeAccountBoardingCompleted Boolean @default(false)
+  connectedAccountId String? @unique
+  page   DonationPage?
+}
